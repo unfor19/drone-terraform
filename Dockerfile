@@ -23,10 +23,10 @@ RUN apk add --no-cache \
     wget \
     openssh-client
 
-ARG terraform_version
-RUN wget -q https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_linux_amd64.zip -O terraform.zip && \
-  unzip terraform.zip -d /bin && \
-  rm -f terraform.zip
+RUN source terraform.version && \
+    wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${TERRAFORM_OS}.zip -O terraform.zip && \
+    unzip terraform.zip -d /bin && \
+    rm -f terraform.zip
 
 COPY --from=builder /go/bin/drone-terraform /bin/
 ENTRYPOINT ["/bin/drone-terraform"]
