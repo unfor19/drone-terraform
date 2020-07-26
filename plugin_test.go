@@ -9,6 +9,8 @@ import (
 )
 
 func TestPlugin(t *testing.T) {
+	os.Setenv("TEST_USER", "meir")
+
 	g := Goblin(t)
 
 	g.Describe("CopyTfEnv", func() {
@@ -131,6 +133,11 @@ func TestPlugin(t *testing.T) {
 					exec.Command("terraform", "destroy", "-var", "username=someuser", "-var", "password=1pass", "-force"),
 				},
 				{
+					"with vars as env vars",
+					args{config: Config{Vars: map[string]string{"testuser": "${TEST_USER}"}}},
+					exec.Command("terraform", "destroy", "-var", "testuser=meir", "-force"),
+				},
+				{
 					"with var-files",
 					args{config: Config{VarFiles: []string{"common.tfvars", "prod.tfvars"}}},
 					exec.Command("terraform", "destroy", "-var-file=common.tfvars", "-var-file=prod.tfvars", "-force"),
@@ -190,6 +197,12 @@ func TestPlugin(t *testing.T) {
 					args{config: Config{Vars: map[string]string{"username": "someuser", "password": "1pass"}}},
 					false,
 					exec.Command("terraform", "plan", "-out=plan.tfout", "-var", "username=someuser", "-var", "password=1pass"),
+				},
+				{
+					"with vars as env vars",
+					args{config: Config{Vars: map[string]string{"testuser": "${TEST_USER}"}}},
+					false,
+					exec.Command("terraform", "plan", "-out=plan.tfout", "-var", "testuser=meir"),
 				},
 				{
 					"with var-files",
