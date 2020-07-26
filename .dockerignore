@@ -3,3 +3,7 @@ build-docker.sh
 CHANGELOG.md
 Dockerfile
 .*
+drone-terraform
+DOCS.md
+*.svg
+.github/
