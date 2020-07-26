@@ -29,8 +29,10 @@ jobs:
           go test
       - name: Build Docker image
         run: |
-          docker build . --file Dockerfile -t unfor19/drone-terraform:${RELEASE_REF}
+          RELEASE_VERSION=$(echo "$RELEASE_REF" | sed "s|refs\/tags\/v||g")
+          docker build . --file Dockerfile --tag unfor19/drone-terraform:${RELEASE_VERSION}
       - name: Push Docker image to registry
         run: |
+          RELEASE_VERSION=$(echo "$RELEASE_REF" | sed "s|refs\/tags\/v||g")
           echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push unfor19/drone-terraform:${RELEASE_REF}
+          docker push unfor19/drone-terraform:${RELEASE_VERSION}
