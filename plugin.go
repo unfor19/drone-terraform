@@ -374,14 +374,14 @@ func getTfoutPath() string {
 
 func vars(vs map[string]string) []string {
 	var args []string
-	var is_env_var bool
 	for k, v := range vs {
-		is_env_var, err := regexp.Match(`^\${.*}$`, []byte(v))
-		if is_env_var {
-			env_var_name := strings.TrimLeft(strings.TrimRight(v,"${"),"}")
-			v = os.Getenv(env_var_name)
+		isEnvVar, err := regexp.Match(`^\${.*}$`, []byte(v))
+		fmt.Println(err)
+		if isEnvVar {
+			envVarName := strings.TrimLeft(strings.TrimRight(v, "${"), "}")
+			v = os.Getenv(envVarName)
 		}
-		args = append(args, "-var", fmt.Sprintf("%s=%s", k, v))			
+		args = append(args, "-var", fmt.Sprintf("%s=%s", k, v))
 	}
 	return args
 }
