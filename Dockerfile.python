@@ -20,7 +20,8 @@ RUN apk add --update --no-cache \
     ca-certificates \
     git \
     openssh-client \
-    python3
+    python3 \
+    aws-cli
 
 COPY --from=builder /go/bin/drone-terraform /bin/terraform /bin/
 ENTRYPOINT ["/bin/drone-terraform"]
