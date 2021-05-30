@@ -3,6 +3,7 @@
 # Based on: https://github.com/aws/aws-cli/issues/4685#issuecomment-829600284
 FROM python:3-alpine3.13 AS aws-build
 RUN apk add --no-cache \
+    bash \
     gcc \
     git \
     libc-dev \
@@ -12,6 +13,8 @@ RUN apk add --no-cache \
     zlib-dev \
     make \
     cmake
+SHELL [ "bash", "-c" ]
+COPY version.sh .
 RUN source version.sh && \
     git clone --recursive  --depth 1 --branch ${AWSCLI_VERSION} --single-branch https://github.com/aws/aws-cli.git
 WORKDIR /aws-cli
