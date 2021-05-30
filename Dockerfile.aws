@@ -56,7 +56,8 @@ RUN apk add --update --no-cache \
     ca-certificates \
     git \
     openssh-client \
-    groff
+    groff \
+    jq
 COPY --from=terraform-build /go/bin/drone-terraform /bin/terraform /bin/
 COPY --from=aws-build /usr/local/aws-cli/ /usr/local/aws-cli/
 COPY --from=aws-build /aws-cli-bin/ /usr/local/bin/
