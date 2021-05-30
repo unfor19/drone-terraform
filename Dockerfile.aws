@@ -48,7 +48,7 @@ RUN source version.sh && \
     unzip terraform.zip -d /bin
 
 
-FROM alpine:3.12
+FROM alpine:3.12 as app
 RUN apk add --update --no-cache \
     ca-certificates \
     git \
