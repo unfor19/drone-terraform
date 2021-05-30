@@ -1,6 +1,6 @@
 # drone-terraform
 
-[![Build Status](http://beta.drone.io/api/badges/jmccann/drone-terraform/status.svg)](http://beta.drone.io/jmccann/drone-terraform)
+[![Push latest version to DockerHub](https://github.com/unfor19/drone-terraform/actions/workflows/pipeline-docker-latest.yml/badge.svg)](https://github.com/unfor19/drone-terraform/actions/workflows/pipeline-docker-latest.yml)
 
 Drone plugin to execute Terraform plan and apply. For the usage information and
 a listing of the available options please take a look at [the docs](https://github.com/jmccann/drone-terraform/blob/master/DOCS.md).
