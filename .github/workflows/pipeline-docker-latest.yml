@@ -53,8 +53,8 @@ jobs:
             --build-arg BUILDKIT_INLINE_CACHE=1
       - name: docker tag cached
         run: |
-          docker tag "cached-${TARGET_BASE}" "${{ matrix.GHCR_CACHED_TAG_PREFIX }}-${TARGET_BASE1}"
-          docker tag "cached-${TARGET_BASE}" "${{ matrix.GHCR_CACHED_TAG_PREFIX }}-${TARGET_BASE2}"
+          docker tag "cached-${TARGET_BASE1}" "${{ matrix.GHCR_CACHED_TAG_PREFIX }}-${TARGET_BASE1}"
+          docker tag "cached-${TARGET_BASE2}" "${{ matrix.GHCR_CACHED_TAG_PREFIX }}-${TARGET_BASE2}"
           docker tag "cached-${TARGET_APP}"  "${{ matrix.GHCR_CACHED_TAG_PREFIX }}-${TARGET_APP}"
       - name: docker push cached to ghcr
         env:
