@@ -19,7 +19,8 @@ FROM alpine:3.12
 RUN apk add --update --no-cache \
     ca-certificates \
     git \
-    openssh-client
+    openssh-client \
+    bash
 
 COPY --from=builder /go/bin/drone-terraform /bin/terraform /bin/
 ENTRYPOINT ["/bin/drone-terraform"]
